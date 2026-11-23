@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>暗記アプリ</title>
+
+<style>
+body{
+    font-family:sans-serif;
+    max-width:800px;
+    margin:30px auto;
+    padding:20px;
+    text-align:center;
+}
+
+.card{
+    border:1px solid #ddd;
+    border-radius:10px;
+    min-height:150px;
+    padding:30px;
+    margin:20px 0;
+    font-size:28px;
+}
+
+button{
+    padding:10px 20px;
+    margin:5px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+#answer{
+    color:#0066cc;
+    margin-top:20px;
+    display:none;
+}
+
+.status{
+    color:#666;
+    margin-bottom:10px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>暗記アプリ</h1>
+
+<div class="status" id="status"></div>
+
+<div class="card">
+    <div id="question"></div>
+    <div id="answer"></div>
+</div>
+
+<button onclick="showAnswer()">答えを見る</button>
+<button onclick="nextCard()">次の問題</button>
+
+<script>
+
+const cards = [
+    {
+        question:"英語で「りんご」",
+        answer:"apple"
+    },
+    {
+        question:"英語で「犬」",
+        answer:"dog"
+    },
+    {
+        question:"英語で「猫」",
+        answer:"cat"
+    }
+];
+
+let current = 0;
+
+function displayCard(){
+    document.getElementById("question").textContent =
+        cards[current].question;
+
+    const answer = document.getElementById("answer");
+
+    answer.textContent =
+        cards[current].answer;
+
+    answer.style.display = "none";
+
+    document.getElementById("status").textContent =
+        `${current + 1} / ${cards.length}`;
+}
+
+function showAnswer(){
+    document.getElementById("answer").style.display = "block";
+}
+
+function nextCard(){
+    current++;
+
+    if(current >= cards.length){
+        current = 0;
+    }
+
+    displayCard();
+}
+
+displayCard();
+
+</script>
+
+</body>
+</html>
